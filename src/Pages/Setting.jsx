@@ -19,11 +19,25 @@ const Setting = () => {
         updatedProducts[index][field] = value;
 
         if (field === 'netPrice' || field === 'yield') {
-            const unitPrice = value / updatedProducts[index].yield;
-            updatedProducts[index].unitPrice = unitPrice.toFixed(2);
+            if (field === 'netPrice') {
+                // Handle netPrice
+                const unitPrice = value / updatedProducts[index].yield;
+                updatedProducts[index].unitPrice = unitPrice.toFixed(2);
+            } else if (field === 'yield') {
+                // Handle yield
+                updatedProducts[index].yield = value;
+                const unitPrice = updatedProducts[index].netPrice / value;
+                updatedProducts[index].unitPrice = unitPrice.toFixed(2);
+            }
         } else if (field === 'salesPriceVAT') {
+            // Handle salesPriceVAT
             updatedProducts[index].salesPriceLessVAT = (value / VAT_RATE).toFixed(2);
+        } else {
+            // Handle other cases
+            const unitPrice = value / updatedProducts[index][field];
+            updatedProducts[index].unitPrice = unitPrice.toFixed(2);
         }
+
 
         // Calculate GP NET PRICE %
         updatedProducts[index].gpNetPrice = calculateGpNetPrice(
@@ -63,14 +77,17 @@ const Setting = () => {
                         <tr key={index} className="text-center">
                             <td className="border">{product.name}</td>
                             <td className="border">
-                                <select
+                                {/* <select
                                     className="p-1"
                                     value={product.size}
                                     onChange={(e) => handleSizeChange(index, e.target.value)}
                                 >
+                                    <option value="100l Keg">100l Keg</option>
                                     <option value="50l Keg">50l Keg</option>
                                     <option value="30L keg">30L keg</option>
-                                </select>
+                                    
+                                </select> */}
+                                <NumericFormat className="p-1" value="20020220" allowLeadingZeros thousandSeparator="," />
                             </td>
                             <td className="border">
                                 <NumericFormat
@@ -88,7 +105,7 @@ const Setting = () => {
                                     onChange={(e) => handleInputChange(index, 'netPrice', e.target.value)}
                                 />
                             </td>
-                            <td className="border">{`£${product.unitPrice}`}</td>
+                            <td className="border">{`£${product.unitPrice.toFixed(2)}`}</td>
                             <td className="border">
                                 <NumericFormat
                                     className="p-1 border"
@@ -99,7 +116,7 @@ const Setting = () => {
                                     style={{ appearance: "textfield" }}
                                 />
                             </td>
-                            <td className="border">{product.salesPriceLessVAT}</td>
+                            <td className="border">{product.salesPriceLessVAT.toFixed(2)}</td>
 
                             <td className="border">{`${product.gpNetPrice}%`}</td>
                         </tr>
