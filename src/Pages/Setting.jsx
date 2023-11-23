@@ -77,17 +77,8 @@ const Setting = () => {
                         <tr key={index} className="text-center">
                             <td className="border">{product.name}</td>
                             <td className="border">
-                                {/* <select
-                                    className="p-1"
-                                    value={product.size}
-                                    onChange={(e) => handleSizeChange(index, e.target.value)}
-                                >
-                                    <option value="100l Keg">100l Keg</option>
-                                    <option value="50l Keg">50l Keg</option>
-                                    <option value="30L keg">30L keg</option>
-                                    
-                                </select> */}
-                                <NumericFormat className="p-1" value="20020220" allowLeadingZeros thousandSeparator="," />
+
+                                <NumericFormat className="p-1" value="30" allowLeadingZeros thousandSeparator="," />
                             </td>
                             <td className="border">
                                 <NumericFormat
@@ -105,7 +96,7 @@ const Setting = () => {
                                     onChange={(e) => handleInputChange(index, 'netPrice', e.target.value)}
                                 />
                             </td>
-                            <td className="border">{`£${product.unitPrice.toFixed(2)}`}</td>
+                            <td className="border">{`£${product.unitPrice}`}</td>
                             <td className="border">
                                 <NumericFormat
                                     className="p-1 border"
@@ -116,7 +107,7 @@ const Setting = () => {
                                     style={{ appearance: "textfield" }}
                                 />
                             </td>
-                            <td className="border">{product.salesPriceLessVAT.toFixed(2)}</td>
+                            <td className="border">{product.salesPriceLessVAT}</td>
 
                             <td className="border">{`${product.gpNetPrice}%`}</td>
                         </tr>
