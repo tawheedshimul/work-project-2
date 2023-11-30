@@ -1,43 +1,23 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { NumericFormat } from 'react-number-format';
+import Stocking from './Stock';
 
 const Setting = () => {
-    const initialProducts = [
-        {
-            category: "Draft-Alc",
-            data: [
-                { name: 'Grolsch', size: '50l Keg', yield: 300, netPrice: 150, unitPrice: 0.5, salesPriceVAT: 4, salesPriceLessVAT: 3.33, gpNetPrice: '85.00' },
-                { name: 'Meantim', size: '30L keg', yield: 88, netPrice: 150, unitPrice: 1.71, salesPriceVAT: 4, salesPriceLessVAT: 3.33, gpNetPrice: '49.00' },
-                { name: 'Peroni', size: '50l Keg', yield: 88, netPrice: 150, unitPrice: 1.71, salesPriceVAT: 4, salesPriceLessVAT: 3.33, gpNetPrice: '49.00' },
-            ]
-        },
-        {
-            category: "Botle",
-            data: [
-                { name: 'Grolsch', size: '50l Keg', yield: 300, netPrice: 150, unitPrice: 0.5, salesPriceVAT: 4, salesPriceLessVAT: 3.33, gpNetPrice: '85.00' },
-                { name: 'Meantim', size: '30L keg', yield: 88, netPrice: 150, unitPrice: 1.71, salesPriceVAT: 4, salesPriceLessVAT: 3.33, gpNetPrice: '49.00' },
-                { name: 'Peroni', size: '50l Keg', yield: 88, netPrice: 150, unitPrice: 1.71, salesPriceVAT: 4, salesPriceLessVAT: 3.33, gpNetPrice: '49.00' },
-            ]
-        },
-        {
-            category: "Bubble",
-            data: [
-                { name: 'Grolsch', size: '50l Keg', yield: 300, netPrice: 150, unitPrice: 0.5, salesPriceVAT: 4, salesPriceLessVAT: 3.33, gpNetPrice: '85.00' },
-                { name: 'Meantim', size: '30L keg', yield: 88, netPrice: 150, unitPrice: 1.71, salesPriceVAT: 4, salesPriceLessVAT: 3.33, gpNetPrice: '49.00' },
-                { name: 'Peroni', size: '50l Keg', yield: 88, netPrice: 150, unitPrice: 1.71, salesPriceVAT: 4, salesPriceLessVAT: 3.33, gpNetPrice: '49.00' },
-            ]
-        },
-        {
-            category: "Vodka",
-            data: [
-                { name: 'Grolsch', size: '50l Keg', yield: 300, netPrice: 150, unitPrice: 0.5, salesPriceVAT: 4, salesPriceLessVAT: 3.33, gpNetPrice: '85.00' },
-                { name: 'Meantim', size: '30L keg', yield: 88, netPrice: 150, unitPrice: 1.71, salesPriceVAT: 4, salesPriceLessVAT: 3.33, gpNetPrice: '49.00' },
-                { name: 'Peroni', size: '50l Keg', yield: 88, netPrice: 150, unitPrice: 1.71, salesPriceVAT: 4, salesPriceLessVAT: 3.33, gpNetPrice: '49.00' },
-            ]
-        },
-    ];
+    const [products, setProducts] = useState([]);
 
-    const [products, setProducts] = useState(initialProducts);
+    useEffect(() => {
+        fetch('/products.json')
+            .then((response) => response.json())
+            .then((data) => {
+                if (data && data.categories) {
+                    setProducts(data.categories);
+                }
+            })
+            .catch((error) => {
+                console.error('Error fetching data:', error);
+            });
+    }, []);
+
     const VAT_RATE = 1.2;
 
     const calculateGpNetPrice = (unitPrice, salesPriceLessVAT) => {
@@ -101,7 +81,13 @@ const Setting = () => {
                                 <tr key={dataIndex} className="text-center">
                                     <td className="border">{product.name}</td>
                                     <td className="border">
-                                        <NumericFormat className="p-1" value={product.size} allowLeadingZeros thousandSeparator="," />
+                                    <NumericFormat
+                                            className="p-1 border"
+                                            type="number"
+                                            value={product.size}
+                                            onChange={(e) => handleInputChange(categoryIndex, dataIndex, 'size', e.target.value)}
+                                        />
+                                        {/* <NumericFormat className="p-1" value={product.size} allowLeadingZeros thousandSeparator="," /> */}
                                     </td>
                                     <td className="border">
                                         <NumericFormat
@@ -140,6 +126,8 @@ const Setting = () => {
                     </table>
                 </div>
             ))}
+
+            <Stocking products={products} />
         </div>
     );
 };

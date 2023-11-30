@@ -1,0 +1,30 @@
+{
+    "categories": [
+      {
+        "category": "Draft-Alc",
+        "data": [
+          { "name": "Grolsch", "size": "50l Keg", "yield": 300, "netPrice": 150, "unitPrice": 0.5, "salesPriceVAT": 4, "salesPriceLessVAT": 3.33, "gpNetPrice": "85.00" },
+          { "name": "Meantim", "size": "30L keg", "yield": 88, "netPrice": 150, "unitPrice": 1.71, "salesPriceVAT": 4, "salesPriceLessVAT": 3.33, "gpNetPrice": "49.00" },
+          { "name": "Peroni", "size": "50l Keg", "yield": 88, "netPrice": 150, "unitPrice": 1.71, "salesPriceVAT": 4, "salesPriceLessVAT": 3.33, "gpNetPrice": "49.00" }
+        ]
+      },
+      {
+        "category": "Draft-Al",
+        "data": [
+          { "name": "Grolsch", "size": "50l Keg", "yield": 300, "netPrice": 150, "unitPrice": 0.5, "salesPriceVAT": 4, "salesPriceLessVAT": 3.33, "gpNetPrice": "85.00" },
+          { "name": "Meantim", "size": "30L keg", "yield": 88, "netPrice": 150, "unitPrice": 1.71, "salesPriceVAT": 4, "salesPriceLessVAT": 3.33, "gpNetPrice": "49.00" },
+          { "name": "Peroni", "size": "50l Keg", "yield": 88, "netPrice": 150, "unitPrice": 1.71, "salesPriceVAT": 4, "salesPriceLessVAT": 3.33, "gpNetPrice": "49.00" }
+        ]
+      },
+      {
+        "category": "Draft-Alc",
+        "data": [
+          { "name": "Grolsch", "size": "50l Keg", "yield": 300, "netPrice": 150, "unitPrice": 0.5, "salesPriceVAT": 4, "salesPriceLessVAT": 3.33, "gpNetPrice": "85.00" },
+          { "name": "Meantim", "size": "30L keg", "yield": 88, "netPrice": 150, "unitPrice": 1.71, "salesPriceVAT": 4, "salesPriceLessVAT": 3.33, "gpNetPrice": "49.00" },
+          { "name": "Peroni", "size": "50l Keg", "yield": 88, "netPrice": 150, "unitPrice": 1.71, "salesPriceVAT": 4, "salesPriceLessVAT": 3.33, "gpNetPrice": "49.00" }
+        ]
+      }
+      
+    ]
+  }
+  
