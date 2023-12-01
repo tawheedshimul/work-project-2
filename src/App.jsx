@@ -1,12 +1,12 @@
 import React from 'react'
-// import Setting from './Pages/Setting';
-import Check from './Pages/Check';
+import Setting from './Pages/Setting';
+// import Check from './Pages/Check';
 
 function App() {
   return (
     <div>
-      {/* <Setting></Setting> */}
-      <Check></Check>
+      <Setting></Setting>
+      {/* <Check></Check> */}
     </div>
   )
 }

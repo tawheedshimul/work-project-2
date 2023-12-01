@@ -32,18 +32,18 @@ const Stock = ({ products, valueType, localStorageKey }) => {
     return (
         <div className="container mx-auto p-4">
             {products.map((category, categoryIndex) => (
-                <div key={categoryIndex}>
-                    <h2 className='font-bold text-2xl text-center p-2 border'>{category.category}</h2>
+                <div key={categoryIndex} className="mb-8 bg-white border border-gray-800 rounded-lg overflow-hidden shadow-lg">
+                    <h2 className="font-bold text-2xl text-center p-2 border bg-gray-200 text-gray-800">{category.category}</h2>
                     <table className="min-w-full border border-gray-300">
                         <thead>
                             <tr>
-                                <th className="border-b">Name</th>
-                                <th className="border-b">Size</th>
-                                <th className="border-b">Yield</th>
-                                <th className="border-b">Net Price (£)</th>
-                                <th className="border-b">Unit Price (£)</th>
-                                <th className="border-b">{valueType}</th>
-                                <th className="border-b">{`${valueType} NET VALUE`}</th>
+                                <th className="border-b p-2">Name</th>
+                                <th className="border-b p-2">Size</th>
+                                <th className="border-b p-2">Yield</th>
+                                <th className="border-b p-2">Net Price (£)</th>
+                                <th className="border-b p-2">Unit Price (£)</th>
+                                <th className="border-b p-2">{valueType}</th>
+                                <th className="border-b p-2">{`${valueType} NET VALUE`}</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -52,25 +52,27 @@ const Stock = ({ products, valueType, localStorageKey }) => {
                                 category.data.map((product, dataIndex) => {
                                     const id = `${category.category}-${product.name}`;
                                     return (
-                                        <tr key={dataIndex} className="text-center">
-                                            <td className="border">{product.name}</td>
-                                            <td className="border">{product.size}</td>
-                                            <td className="border">{product.yield}</td>
-                                            <td className="border">{`£${product.netPrice}`}</td>
-                                            <td className="border">{`£${product.unitPrice}`}</td>
-                                            <td className="border">
+                                        <tr key={dataIndex} className="text-center hover:bg-lime-100 transition">
+                                            <td className="border p-2">{product.name}</td>
+                                            <td className="border p-2">{product.size}</td>
+                                            <td className="border p-2">{product.yield}</td>
+                                            <td className="border p-2">{`£${product.netPrice}`}</td>
+                                            <td className="border p-2">{`£${product.unitPrice}`}</td>
+                                            <td className="border p-2">
                                                 <input
                                                     type="number"
                                                     value={values[categoryIndex][dataIndex].value}
                                                     onChange={(e) => handleValueChange(id, e.target.value)}
+                                                    className="p-1 border rounded-md text-center"
                                                 />
                                             </td>
-                                            <td className="border">
+                                            <td className="border p-2">
                                                 <NumericFormat
                                                     value={values[categoryIndex][dataIndex].value * product.unitPrice || 0}
                                                     displayType={'text'}
                                                     thousandSeparator={true}
                                                     prefix={'£'}
+                                                    className="p-1 border rounded-md text-center"
                                                 />
                                             </td>
                                         </tr>
@@ -81,6 +83,7 @@ const Stock = ({ products, valueType, localStorageKey }) => {
                 </div>
             ))}
         </div>
+
     );
 };
 

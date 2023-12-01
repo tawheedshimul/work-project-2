@@ -91,7 +91,7 @@ const Check = () => {
 
   return (
     <Tabs>
-      <TabList>
+      <TabList className="fixed text-white bottom-0 w-full mx-auto text-center bg-gray-800 py-1 px-5 text-semibold">
         <Tab>Setting</Tab>
         <Tab>Opening</Tab>
         <Tab>Closing Stock</Tab>
@@ -101,28 +101,30 @@ const Check = () => {
       <TabPanel>
         <div className="container mx-auto p-4">
           {products.map((category, categoryIndex) => (
-            <div key={categoryIndex}>
-              <h2 className='font-bold text-2xl text-center p-2 border'>{category.category}</h2>
-              <table className="min-w-full border border-gray-300">
-                <thead>
+            <div key={categoryIndex} className="mb-8 bg-white border border-gray-800  rounded-lg overflow-hidden shadow-lg">
+              <h2 className="font-serif font-bold text-4xl text-center p-4 border-b-4 border-gray-500 bg-gray-200 text-gray-800">
+                {category.category}
+              </h2>
+              <table className="min-w-full">
+                <thead className="bg-gray-200">
                   <tr>
-                    <th className="border-b">Name</th>
-                    <th className="border-b">Size</th>
-                    <th className="border-b">Yield</th>
-                    <th className="border-b">Net Price (£)</th>
-                    <th className="border-b">Unit Price (£)</th>
-                    <th className="border-b">Sales Price with VAT (£)</th>
-                    <th className="border-b">Sales Price Less VAT (£)</th>
-                    <th className="border-b">GP% NET PRICE</th>
+                    <th className="border-b-2 px-8">Name</th>
+                    <th className="border-b-2 p-2">Size</th>
+                    <th className="border-b-2 p-2">Yield</th>
+                    <th className="border-b-2 p-2">Unit Price (£)</th>
+                    <th className="border-b-2 p-2">Sales Price with VAT (£)</th>
+                    <th className="border-b-2 p-2">Net Price (£)</th>
+                    <th className="border-b-2 p-2">Sales Price Less VAT (£)</th>
+                    <th className="border-b-2 p-2">GP% NET PRICE</th>
                   </tr>
                 </thead>
                 <tbody>
                   {category.data.map((product, dataIndex) => (
-                    <tr key={dataIndex} className="text-center">
+                    <tr key={dataIndex} className="text-center hover:bg-lime-100 transition">
                       <td className="border">{product.name}</td>
                       <td className="border">
                         <NumericFormat
-                          className="p-1 border"
+                          className="p-2 border rounded-md text-center"
                           type="number"
                           value={product.size}
                           onChange={(e) => handleInputChange(categoryIndex, dataIndex, 'size', e.target.value)}
@@ -130,7 +132,7 @@ const Check = () => {
                       </td>
                       <td className="border">
                         <NumericFormat
-                          className="p-1 border"
+                          className="p-2 border rounded-md text-center"
                           type="number"
                           value={product.yield}
                           onChange={(e) => handleInputChange(categoryIndex, dataIndex, 'yield', e.target.value)}
@@ -138,7 +140,7 @@ const Check = () => {
                       </td>
                       <td className="border">
                         <NumericFormat
-                          className="p-1 border"
+                          className="p-2 border rounded-md text-center"
                           type="number"
                           value={product.netPrice}
                           onChange={(e) => handleInputChange(categoryIndex, dataIndex, 'netPrice', e.target.value)}
@@ -148,7 +150,7 @@ const Check = () => {
                       <td className="border">{`£${product.unitPrice}`}</td>
                       <td className="border">
                         <NumericFormat
-                          className="p-1 border"
+                          className="p-2 border rounded-md text-center"
                           type="number"
                           value={product.salesPriceVAT}
                           onChange={(e) => handleInputChange(categoryIndex, dataIndex, 'salesPriceVAT', e.target.value)}
