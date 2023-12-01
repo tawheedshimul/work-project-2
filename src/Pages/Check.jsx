@@ -20,8 +20,8 @@ const Check = () => {
         if (products.length === 0) {
           console.log('Local storage is empty. Fetching from the server...');
 
-          const response = await fetch('/products.json');
-          const data = await response.json();
+          // const response = await fetch('/products.json');
+          // const data = await response.json();
 
           if (data && data.categories) {
             console.log('Data fetched from the server:', data.categories);
@@ -191,9 +191,9 @@ const initialProducts = {
       ]
     },
     {
-      "category": "Draft-Al",
+      "category": "Bottle",
       "data": [
-        { "name": "Grolsch", "size": "50l Keg", "yield": 300, "netPrice": 150, "unitPrice": 0.5, "salesPriceVAT": 4, "salesPriceLessVAT": 3.33, "gpNetPrice": "85.00" },
+        { "name": "Black Sheep", "size": "50l Keg", "yield": 300, "netPrice": 150, "unitPrice": 0.5, "salesPriceVAT": 4, "salesPriceLessVAT": 3.33, "gpNetPrice": "85.00" },
         { "name": "Meantim", "size": "30L keg", "yield": 88, "netPrice": 150, "unitPrice": 1.71, "salesPriceVAT": 4, "salesPriceLessVAT": 3.33, "gpNetPrice": "49.00" },
         { "name": "Peroni", "size": "50l Keg", "yield": 88, "netPrice": 150, "unitPrice": 1.71, "salesPriceVAT": 4, "salesPriceLessVAT": 3.33, "gpNetPrice": "49.00" }
       ]

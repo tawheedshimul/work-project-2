@@ -1,28 +1,28 @@
 import React, { useState, useEffect } from 'react';
 import { NumericFormat } from 'react-number-format';
 
-const Stock = ({ products, valueType, localStorageKey }) => {
-    const getInitialValues = () => {
-        const storedValues = JSON.parse(localStorage.getItem(localStorageKey)) || [];
+const Stocking = ({ products }) => {
+    const getInitialOpeningStockValues = () => {
+        const storedValues = JSON.parse(localStorage.getItem('openingStockValues')) || [];
         return products.map((category, categoryIndex) =>
             category.data.map((product, dataIndex) => ({
-                value: storedValues[categoryIndex]?.[dataIndex]?.value || product[valueType] || 0,
+                value: storedValues[categoryIndex]?.[dataIndex]?.value || product.openingStock || 0,
                 id: `${category.category}-${product.name}`,
             }))
         );
     };
 
-    const [values, setValues] = useState(getInitialValues);
+    const [openingStockValues, setOpeningStockValues] = useState(getInitialOpeningStockValues);
 
     useEffect(() => {
-        localStorage.setItem(localStorageKey, JSON.stringify(values));
-    }, [values, localStorageKey]);
+        localStorage.setItem('openingStockValues', JSON.stringify(openingStockValues));
+    }, [openingStockValues]);
 
-    const handleValueChange = (id, value) => {
-        const newValues = values.map(category =>
+    const handleOpeningStockChange = (id, value) => {
+        const newOpeningStockValues = openingStockValues.map(category =>
             category.map(product => (product.id === id ? { ...product, value } : product))
         );
-        setValues(newValues);
+        setOpeningStockValues(newOpeningStockValues);
     };
 
     if (!products || !Array.isArray(products) || products.length === 0) {
@@ -42,8 +42,8 @@ const Stock = ({ products, valueType, localStorageKey }) => {
                                 <th className="border-b">Yield</th>
                                 <th className="border-b">Net Price (£)</th>
                                 <th className="border-b">Unit Price (£)</th>
-                                <th className="border-b">{valueType}</th>
-                                <th className="border-b">{`${valueType} NET VALUE`}</th>
+                                <th className="border-b">Opening Stock</th>
+                                <th className="border-b">Opening Stock NET VALUE</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -61,13 +61,19 @@ const Stock = ({ products, valueType, localStorageKey }) => {
                                             <td className="border">
                                                 <input
                                                     type="number"
-                                                    value={values[categoryIndex][dataIndex].value}
-                                                    onChange={(e) => handleValueChange(id, e.target.value)}
+                                                    value={openingStockValues[categoryIndex][dataIndex].value}
+                                                    onChange={(e) =>
+                                                        handleOpeningStockChange(id, e.target.value)
+                                                    }
                                                 />
                                             </td>
                                             <td className="border">
                                                 <NumericFormat
-                                                    value={values[categoryIndex][dataIndex].value * product.unitPrice || 0}
+                                                    value={
+                                                        openingStockValues[categoryIndex][dataIndex].value *
+                                                            product.unitPrice ||
+                                                        0
+                                                    }
                                                     displayType={'text'}
                                                     thousandSeparator={true}
                                                     prefix={'£'}
@@ -84,4 +90,4 @@ const Stock = ({ products, valueType, localStorageKey }) => {
     );
 };
 
-export default Stock;
+export default Stocking;
